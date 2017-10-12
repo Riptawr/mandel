@@ -176,6 +176,7 @@ fn write_image(
 }
 
 extern crate crossbeam;
+extern crate num_cpus;
 use std::io::Write;
 
 fn main() {
@@ -202,7 +203,8 @@ fn main() {
 
     // render(&mut pixels, bounds, upper_left, lower_right);
 
-    let threads = 16;
+    let threads = num_cpus::get();
+    println!("Using {} threads", threads);
     let rows_per_band = bounds.1 / threads + 1;
 
     {
